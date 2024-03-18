@@ -8,4 +8,6 @@ import { ButtonComponent } from '../button/button.component';
   templateUrl: './info.component.html',
   styleUrl: './info.component.css',
 })
-export class InfoComponent {}
+export class InfoComponent {
+  gentlemenCount = 0;
+}

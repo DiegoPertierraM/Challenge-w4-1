@@ -2,7 +2,105 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {},
+  "projects": {
+    "gentlemen": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/gentlemen",
+      "sourceRoot": "projects/gentlemen/src",
+      "prefix": "isdi",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/gentlemen",
+            "index": "projects/gentlemen/src/index.html",
+            "browser": "projects/gentlemen/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/gentlemen/tsconfig.app.json",
+            "assets": [
+              "projects/gentlemen/src/favicon.ico",
+              "projects/gentlemen/src/assets"
+            ],
+            "styles": [
+              "projects/gentlemen/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "gentlemen:build:production"
+            },
+            "development": {
+              "buildTarget": "gentlemen:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "gentlemen:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/gentlemen/tsconfig.spec.json",
+            "assets": [
+              "projects/gentlemen/src/favicon.ico",
+              "projects/gentlemen/src/assets"
+            ],
+            "styles": [
+              "projects/gentlemen/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/gentlemen/**/*.ts",
+              "projects/gentlemen/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
